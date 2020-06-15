@@ -26,6 +26,8 @@ public class PushoverMessage {
 
 	private MessagePriority priority = MessagePriority.NORMAL;
 
+	private PushoverImage image;
+
 	private Long timestamp;
 
 	private String sound;
@@ -141,6 +143,15 @@ public class PushoverMessage {
 			msg.sound = sound;
 			return this;
 		}
+
+		/**
+		 * (optional) - add an image to the notification. limited to 2.5meg
+		 */
+		public Builder setImage(PushoverImage image) {
+			msg.image = image;
+			return this;
+		}
+
 	}
 
 	public String getApiToken() {
@@ -187,4 +198,7 @@ public class PushoverMessage {
 		return htmlMessage;
 	}
 
+	public PushoverImage getImage(){
+		return image;
+	}
 }
