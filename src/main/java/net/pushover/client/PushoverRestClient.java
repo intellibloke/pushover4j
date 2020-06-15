@@ -45,6 +45,7 @@ public class PushoverRestClient implements PushoverClient {
 		nvps.add(new BasicNameValuePair("user", msg.getUserId()));
 		if (msg.getHtmlMessage() != null && msg.getHtmlMessage().trim().length() > 0) {
 			nvps.add(new BasicNameValuePair("message", msg.getHtmlMessage()));
+			nvps.add(new BasicNameValuePair("html", "1"));
 		} else {
 			nvps.add(new BasicNameValuePair("message", msg.getMessage()));
 		}
@@ -57,10 +58,6 @@ public class PushoverRestClient implements PushoverClient {
 		addPairIfNotNull(nvps, "device", msg.getDevice());
 		addPairIfNotNull(nvps, "timestamp", msg.getTimestamp());
 		addPairIfNotNull(nvps, "sound", msg.getSound());
-
-		if (msg.getHtmlMessage() != null && msg.getHtmlMessage().trim().length() > 0) {
-			addPairIfNotNull(nvps, "html", "1");
-		}
 
 		if (!MessagePriority.NORMAL.equals(msg.getPriority())) {
 			addPairIfNotNull(nvps, "priority", msg.getPriority());
@@ -100,7 +97,7 @@ public class PushoverRestClient implements PushoverClient {
 	/**
 	 * Optionally provide an alternative {@link HttpClient}
 	 * 
-	 * @param httpClient
+	 * @param httpClient Apache HttpClient instance
 	 */
 	public void setHttpClient(HttpClient httpClient) {
 		this.httpClient = httpClient;
